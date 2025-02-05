@@ -1,0 +1,22 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+thead th:nth-child(2) {
+    background-color: lightgray;
+}
+tbody td:first-child, tbody td:last-child {
+    background-color: lightblue;
+}
+.error-message {
+    color: red;
+    border: 1px solid red;
+    display: none;
+    margin-top: 5px;
+    padding: 3px;
+}

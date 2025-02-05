@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irodalom</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Szerző neve</th>
+                <th>Korszak</th>
+                <th colspan="2">Szerelmek</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Balassi Bálint</td><td>reformáció</td><td>Losonczy Anna</td><td>Dobó Krisztina</td></tr>
+            <tr><td>Csokonai Vitéz Mihály</td><td>felvilágosodás</td><td colspan="2">Vajda Juliána</td></tr>
+            <tr><td>Petőfi Sándor</td><td>magyar romantika</td><td>Mednyánszky Berta</td><td>Szendrey Júlia</td></tr>
+            <tr><td>Ady Endre</td><td>20. század</td><td>Léda</td><td>Csinszka</td></tr>
+        </tbody>
+    </table>
+
+    <form id="form" action="#">
+        <label for="kolto_nev">Költő neve:</label><br>
+        <input type="text" id="kolto_nev" name="kolto_nev">
+        <div class="error-message" id="error-kolto-nev">Hiba: Kérjük, adja meg a költő nevét!</div><br><br>
+
+        <label for="korszak">Korszak:</label><br>
+        <input type="text" id="korszak" name="korszak">
+        <div class="error-message" id="error-korszak">Hiba: Kérjük, adja meg a korszakot!</div><br><br>
+
+        <label for="szerelem1">Szerelme:</label><br>
+        <input type="text" id="szerelem1" name="szerelem1">
+        <div class="error-message" id="error-szerelem1">Hiba: Kérjük, adja meg az első szerelmet!</div><br><br>
+
+        <label for="masodik">Volt másik szerelme?</label>
+        <input name="masodik" id="masodik" type="checkbox"><br><br>
+
+        <label for="szerelem2">Szerelme:</label><br>
+        <input type="text" id="szerelem2" name="szerelem2">
+        <div class="error-message" id="error-szerelem2">Hiba: Kérjük, adja meg a második szerelmet!</div><br><br>
+
+        <button type="submit">Hozzáadás</button>
+    </form>
+</body>
+</html>
