@@ -71,18 +71,67 @@ function generateTable() { // Definiálom a generateTable függvényt
         row.appendChild(rowField2); // Hozzáadja a cellát az aktuális táblázatsorhoz
 
         const rowField3 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field3" adatának tárolására
-        rowField3.innerHTML = currentElement.field3; // Beállítja a cella tartalmát az aktuális objektum "field3" mezőjére
+        
 
         if (!currentElement.field4) { // Ellenőrzi, hogy az aktuális objektumban van-e "field4"
+            rowField3.innerHTML = (currentElement.field3 === "") ? "-" : currentElement.field3; 
             rowField3.colSpan = 2; // Ha nincs "field4" mező, akkor két oszlopot foglal el
             row.appendChild(rowField3); // Hozzáadja a cellát az aktuális táblázatsorhoz
         } else { // Ha van "field4", külön cellát készítünk hozzá
-            row.appendChild(rowField3); // Hozzáadja a cellát az aktuális táblázatsorhoz
+            rowField3.innerHTML = (currentElement.field3 === "") ? "-" : currentElement.field3; 
+            row.appendChild(rowField3);
+
             const rowField4 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field4" adatának tárolására
-            rowField4.innerHTML = currentElement.field4; // Beállítja a cella tartalmát az aktuális objektum "field4" mezőjére
+            rowField4.innerHTML = (currentElement.field4 === "") ? "-" : currentElement.field4;
             row.appendChild(rowField4); // Hozzáadja a cellát az aktuális táblázatsorhoz
         }
     }
 }
 
 generateTable(); // A generált táblázat generálásának meghívása
+
+const form = document.getElementById('form');
+
+form.addEventListener('submit',function(e) {
+    e.preventDefault(); // A form submit eseménye elkerülésének megelőzése
+
+    const szerzoNeve = document.getElementById('kolto_nev')
+    const korszak = document.getElementById('korszak')
+    const szerelem1 = document.getElementById('szerelem1')
+    const szerelem2 = document.getElementById('szerelem2')
+    const checkbox = document.getElementById('masodik')
+
+    const szerzoNeveValue = szerzoNeve.value
+    const korszakValue = korszak.value
+    const szerelem1Value = szerelem1.value
+    const szerelem2Value = szerelem2.value
+    const checkboxChecked = checkbox.checked
+
+    let field3 = "";
+    let field4 = undefined;
+
+    if(!checkboxChecked) {
+        field3 = (szerelem1Value === "") ? "-" : szerelem1Value;
+    }else{
+        field3 = (szerelem1Value === "") ? "-" : szerelem1Value;
+        field4 = (szerelem2Value === "") ? "-" : szerelem2Value;
+    }
+
+    const newElement = {
+        field1: szerzoNeveValue,
+        field2: korszakValue,
+        field3: field3,
+        field4: field4      
+    }
+
+    array.push(newElement);
+    table.innerHTML = '';
+    table.appendChild(tableHeader);
+    generateTable();
+
+    szerzoNeve.value = "";
+    korszak.value = "";
+    szerelem1.value = "";
+    szerelem2.value = "";
+    checkbox.checked = false;
+})
