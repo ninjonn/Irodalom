@@ -54,72 +54,25 @@ table.appendChild(tableBody); // A törzs hozzáadása a táblázathoz
 const row1 = document.createElement('tr'); // Táblázat első sorának létrehozása
 tableBody.appendChild(row1); // Az első sor hozzáadása a törzshöz
 
-const row1Cell1 = document.createElement('td'); // Első cella létrehozása az első sorhoz
-row1Cell1.innerHTML = array[1].field1; // Az első cella szövegének beállítása az első sor 'field1' értékére
-row1.appendChild(row1Cell1); // A cella hozzáadása az első sorhoz
+for(let i = 1; i < array.length; i++) { // Végigiterál az `array` elemein az első elem kihagyásával
+    const currentElement = array[i]; // Az aktuális sor objektumát elmenti a `currentElement` változóba
 
-const row1Cell2 = document.createElement('td'); // Második cella létrehozása az első sorhoz
-row1Cell2.innerHTML = array[1].field2; // A második cella szövegének beállítása az első sor 'field2' értékére
-row1.appendChild(row1Cell2); // A cella hozzáadása az első sorhoz
+    const row = document.createElement('tr'); // Létrehoz egy új táblázatsort
+    tableBody.appendChild(row); // Hozzáadja az új sort a táblázat törzséhez
 
-const row1Cell3 = document.createElement('td'); // Harmadik cella létrehozása az első sorhoz
-row1Cell3.innerHTML = array[1].field3; // A harmadik cella szövegének beállítása az első sor 'field3' értékére
-row1.appendChild(row1Cell3); // A cella hozzáadása az első sorhoz
+    const rowField1 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field1" adatának tárolására
+    rowField1.innerHTML = currentElement.field1; // Beállítja a cella tartalmát az aktuális objektum "field1" mezőjére
+    row.appendChild(rowField1); // Hozzáadja a cellát az aktuális táblázatsorhoz
 
-const row1Cell4 = document.createElement('td'); // Negyedeik cella létrehozása az első sorhoz
-row1Cell4.innerHTML = array[1].field4; // A negyedik cella szövegének beállítása az első sor 'field4' értékére
-row1.appendChild(row1Cell4); // A cella hozzáadása az első sorhoz
+    const rowField2 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field2" adatának tárolására
+    rowField2.innerHTML = currentElement.field2; // Beállítja a cella tartalmát az aktuális objektum "field2" mezőjére
+    row.appendChild(rowField2); // Hozzáadja a cellát az aktuális táblázatsorhoz
 
-const row2 = document.createElement('tr'); // Második sor létrehozása
-tableBody.appendChild(row2); // A második sor hozzáadása a törzshöz
+    const rowField3 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field3" adatának tárolására
+    rowField3.innerHTML = currentElement.field3; // Beállítja a cella tartalmát az aktuális objektum "field3" mezőjére
+    row.appendChild(rowField3); // Hozzáadja a cellát az aktuális táblázatsorhoz
 
-const row2Cell1 = document.createElement('td'); // Első cella létrehozása a második sorhoz
-row2Cell1.innerHTML = array[2].field1; // Az első cella szövegének beállítása a második sor 'field1' értékére
-row2.appendChild(row2Cell1); // A cella hozzáadása a második sorhoz
-
-const row2Cell2 = document.createElement('td'); // Második cella létrehozása a második sorhoz
-row2Cell2.innerHTML = array[2].field2; // A második cella szövegének beállítása a második sor 'field2' értékére
-row2.appendChild(row2Cell2); // A cella hozzáadása a második sorhoz
-
-const row2Cell3 = document.createElement('td'); // Harmadik cella létrehozása a második sorhoz
-row2Cell3.innerHTML = array[2].field3; // A harmadik cella szövegének beállítása a második sor 'field3' értékére
-row2Cell3.colSpan = 2; // A cella két oszlopot foglal el
-row2.appendChild(row2Cell3); // A cella hozzáadása a második sorhoz
-
-const row3 = document.createElement('tr'); // Harmadik sor létrehozása
-tableBody.appendChild(row3); // A harmadik sor hozzáadása a törzshöz
-
-const row3Cell1 = document.createElement('td'); // Első cella létrehozása a harmadik sorhoz
-row3Cell1.innerHTML = array[3].field1; // Az első cella szövegének beállítása a harmadik sor 'field1' értékére
-row3.appendChild(row3Cell1); // A cella hozzáadása a harmadik sorhoz
-
-const row3Cell2 = document.createElement('td'); // Második cella létrehozása a harmadik sorhoz
-row3Cell2.innerHTML = array[3].field2; // A második cella szövegének beállítása a harmadik sor 'field2' értékére
-row3.appendChild(row3Cell2); // A cella hozzáadása a harmadik sorhoz
-
-const row3Cell3 = document.createElement('td'); // Harmadik cella létrehozása a harmadik sorhoz
-row3Cell3.innerHTML = array[3].field3; // A harmadik cella szövegének beállítása a harmadik sor 'field3' értékére
-row3.appendChild(row3Cell3); // A cella hozzáadása a harmadik sorhoz
-
-const row3Cell4 = document.createElement('td'); // Negyedik cella létrehozása a harmadik sorhoz
-row3Cell4.innerHTML = array[3].field4; // A negyedik cella szövegének beállítása a harmadik sor 'field4' értékére
-row3.appendChild(row3Cell4); // A cella hozzáadása a harmadik sorhoz
-
-const row4 = document.createElement('tr'); // Negyedik sor létrehozása
-tableBody.appendChild(row4); // A negyedik sor hozzáadása a törzshöz
-
-const row4Cell1 = document.createElement('td'); // Első cella létrehozása a negyedik sorhoz
-row4Cell1.innerHTML = array[4].field1; // Az első cella szövegének beállítása a negyedik sor 'field1' értékére
-row4.appendChild(row4Cell1); // A cella hozzáadása a negyedik sorhoz
-
-const row4Cell2 = document.createElement('td'); // Második cella létrehozása a negyedik sorhoz
-row4Cell2.innerHTML = array[3].field2; // A második cella szövegének beállítása a negyedik sor 'field2' értékére
-row4.appendChild(row4Cell2); // A cella hozzáadása a negyedik sorhoz
-
-const row4Cell3 = document.createElement('td'); // Harmadik cella létrehozása a negyedik sorhoz
-row4Cell3.innerHTML = array[3].field3; // A harmadik cella szövegének beállítása a negyedik sor 'field3' értékére
-row4.appendChild(row4Cell3); // A cella hozzáadása a negyedik sorhoz
-
-const row4Cell4 = document.createElement('td'); // Negyedik cella létrehozása a negyedik sorhoz
-row4Cell4.innerHTML = array[3].field4; // A negyedik cella szövegének beállítása a negyedik sor 'field4' értékére
-row4.appendChild(row4Cell4); // A cella hozzáadása a negyedik sorhoz
+    const rowField4 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field4" adatának tárolására
+    rowField4.innerHTML = currentElement.field4; // Beállítja a cella tartalmát az aktuális objektum "field4" mezőjére
+    row.appendChild(rowField4); // Hozzáadja a cellát az aktuális táblázatsorhoz
+}
