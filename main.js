@@ -50,6 +50,8 @@ headerRow.appendChild(headerCell3); // A cella hozzáadása a fejlécsorhoz
 
 
 function generateTable() { // Definiálom a generateTable függvényt
+    table.innerHTML = ''; // Törlöm az előző táblázatot
+
     const tableBody = document.createElement('tbody'); // Táblázat törzs elem létrehozása
     table.appendChild(tableBody); // A törzs hozzáadása a táblázathoz
 
@@ -102,12 +104,44 @@ form.addEventListener('submit',function(e) { // Az űrlap submit eseményére fe
     const szerelem2 = document.getElementById('szerelem2')
     const checkbox = document.getElementById('masodik') 
 
+    const urlap = e.currentTarget;
+    const errors = urlap.querySelectorAll('.error-message');
+    for(const error of errors) {
+        error.innerHTML = "";
+    }
+
     // Az input elemek aktuális értékeinek kiolvasása:
     const szerzoNeveValue = szerzoNeve.value 
     const korszakValue = korszak.value
     const szerelem1Value = szerelem1.value
     const szerelem2Value = szerelem2.value
     const checkboxChecked = checkbox.checked
+
+    let valid = true;
+
+    const nevErrorMessage = document.getElementById('error-korszak');
+    const nevMessage = nevErrorMessage.textContent;
+
+    if (korszakValue === "") {
+        const parentElement = korszak.parentElement;
+        const errorKorszak = parentElement.querySelector('.error-message');
+        errorKorszak.textContent = nevMessage;
+        valid = false;
+    }
+
+    const korszakErrorMessage = document.getElementById('error-korszak');
+    const korszakMessage = korszakErrorMessage.textContent;
+
+    if (korszakValue === "") {
+        const parentElement = korszak.parentElement;
+        const errorKorszak = parentElement.querySelector('.error-message');
+        errorKorszak.textContent = korszakMessage;
+        valid = false;
+    }
+
+    if (!valid) {
+        return; // Kilép a függvényből, így nem kerül hozzáadásra a táblázatba az új sor
+    }
 
     // Inicializáljuk a változókat, amelyek a táblázatban megjelenítendő szerelem értékeket fogják tartalmazni:
     let field3 = "";
