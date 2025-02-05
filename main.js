@@ -54,7 +54,7 @@ table.appendChild(tableBody); // A törzs hozzáadása a táblázathoz
 const row1 = document.createElement('tr'); // Táblázat első sorának létrehozása
 tableBody.appendChild(row1); // Az első sor hozzáadása a törzshöz
 
-for(let i = 1; i < array.length; i++) { // Végigiterál az `array` elemein az első elem kihagyásával
+for (let i = 1; i < array.length; i++) { // Végigiterál az `array` elemein az első elem kihagyásával
     const currentElement = array[i]; // Az aktuális sor objektumát elmenti a `currentElement` változóba
 
     const row = document.createElement('tr'); // Létrehoz egy új táblázatsort
@@ -70,9 +70,14 @@ for(let i = 1; i < array.length; i++) { // Végigiterál az `array` elemein az e
 
     const rowField3 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field3" adatának tárolására
     rowField3.innerHTML = currentElement.field3; // Beállítja a cella tartalmát az aktuális objektum "field3" mezőjére
-    row.appendChild(rowField3); // Hozzáadja a cellát az aktuális táblázatsorhoz
 
-    const rowField4 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field4" adatának tárolására
-    rowField4.innerHTML = currentElement.field4; // Beállítja a cella tartalmát az aktuális objektum "field4" mezőjére
-    row.appendChild(rowField4); // Hozzáadja a cellát az aktuális táblázatsorhoz
+    if (!currentElement.field4) { // Ellenőrzi, hogy az aktuális objektumban van-e "field4"
+        rowField3.colSpan = 2; // Ha nincs "field4" mező, akkor két oszlopot foglal el
+        row.appendChild(rowField3); // Hozzáadja a cellát az aktuális táblázatsorhoz
+    } else { // Ha van "field4", külön cellát készítünk hozzá
+        row.appendChild(rowField3); // Hozzáadja a cellát az aktuális táblázatsorhoz
+        const rowField4 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field4" adatának tárolására
+        rowField4.innerHTML = currentElement.field4; // Beállítja a cella tartalmát az aktuális objektum "field4" mezőjére
+        row.appendChild(rowField4); // Hozzáadja a cellát az aktuális táblázatsorhoz
+    }
 }
