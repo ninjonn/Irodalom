@@ -3,24 +3,24 @@ const headerObj = { // A header objektum, amely a táblázat oszlopait reprezent
     field2:'Korszak', // headerobj field3 tulajdonságának megadjuk az értéket
     field3:'Szerelmek' // headerobj field2 tulajdonságának megadjuk az értéket
 };
-const row1Obj = { // Az első sor objektuma, amely az első tudományos területet és a hozzá tartozó adatokat tartalmazza
+const row1Obj = { // Az első sor objektuma
     field1:'Balassi Bálint', // row1Obj field1 tulajdonságának megadjuk az értéket
     field2:'reformáció', // row1Obj field2 tulajdonságának megadjuk az értéket
     field3:'Losonczy Anna', // row1Obj field3 tulajdonságának megadjuk az értéket
     field4:'Dobó Krisztina' // row1Obj field4 tulajdonságának megadjuk az értéket
 };
-const row2Obj = { // A második sor objektuma, amely az asztronómiát és a hozzá tartozó adatokat tartalmazza
+const row2Obj = { // A második sor objektuma
     field1:'Csokonay Vitéz Mihály', // row2Obj field1 tulajdonságának megadjuk az értéket
     field2:'felvilágosodás', // row2Obj field2 tulajdonságának megadjuk az értéket
     field3:'Vajda Juliána', // row2Obj field3 tulajdonságának megadjuk az értéket
 };
-const row3Obj = { // A harmadik sor objektuma, amely a kvantumfizikát és a hozzá tartozó adatokat tartalmazza
+const row3Obj = { // A harmadik sor objektuma
     field1:'Petőfi Sándor', // row3Obj field1 tulajdonságának megadjuk az értéket
     field2:'magyar romantika', // row3Obj field2 tulajdonságának megadjuk az értéket
     field3:'Mednyánszky Berta', // row3Obj field3 tulajdonságának megadjuk az értéket
     field4:'Szendrey Júlia' // row3Obj field4 tulajdonságának megadjuk az értéket
 };
-const row4Obj = { // A negyedik sor objektuma, amely a modern fizikát és a hozzá tartozó adatokat tartalmazza
+const row4Obj = { // A negyedik sor objektuma
     field1:'Ady Endre', // row4Obj field1 tulajdonságának megadjuk az értéket
     field2:'20. század', // row4Obj field2 tulajdonságának megadjuk az értéket
     field3:'Léda', // row4Obj field3 tulajdonságának megadjuk az értéket
