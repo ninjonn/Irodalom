@@ -90,10 +90,24 @@ function generateTable() { // Definiálom a generateTable függvényt
         }
     }
 }
-
 generateTable(); // A generált táblázat generálásának meghívása
 
 const form = document.getElementById('form'); // Megkeresi az `form` azonosítójú HTML elemet
+
+const szerzoNeveError = document.getElementById('error-kolto-nev'); // HTML elem lekérése, amely a szerző nevéhez tartozó hibaüzenetet jeleníti meg
+const korszakError = document.getElementById('error-korszak'); // HTML elem lekérése, amely a korszakhoz tartozó hibaüzenetet jeleníti meg
+
+function validateField(inputElement,errorElement){ // Függvény, amely egy bemeneti mezőt és egy hibaüzenet elemet vár, hogy validálja a bemeneti mezőt
+    let valid = true; // A valid változó alapértelmezett értéke igaz, amely azt jelzi, hogy a mező helyes
+
+    if(inputElement.value === ""){  // Ha a bemeneti mező értéke üres
+        errorElement.style.display = "block"; // A hibaüzenet megjelenítése láthatóvá válik
+        valid = false; // Az érték nem valid, így false-ra állítjuk
+    }else{
+        errorElement.style.display = "none"; // Ha a mezőben van érték, elrejtjük a hibaüzenetet
+    }
+    return valid; // Visszaadja, hogy a mező valid-e
+}
 
 form.addEventListener('submit', function (e) { // Az űrlap submit eseményére feliratkozunk egy eseménykezelővel
     e.preventDefault(); // A form submit eseménye elkerülésének megelőzése
@@ -105,28 +119,17 @@ form.addEventListener('submit', function (e) { // Az űrlap submit eseményére 
     const szerelem2 = document.getElementById('szerelem2')
     const checkbox = document.getElementById('masodik')
 
-    // Lekérjük a név és korszak hibaüzenethez tartozó HTML elemeket az azonosítóik alapján
-    const szerzoNeveError = document.getElementById('error-kolto-nev');
-    const korszakError = document.getElementById('error-korszak');
+    let valid = true // Létrehozunk egy `valid` változót, amely azt jelzi, hogy az űrlap megfelelően van-e kitöltve
 
-    // Alapértelmezetten elrejtjük a hibaüzeneteket, hogy csak akkor jelenjenek meg, ha hiba van
-    szerzoNeveError.style.display = 'none';
-    korszakError.style.display = 'none';
-
-    let valid = true; // Létrehozunk egy `valid` változót, amely azt jelzi, hogy az űrlap megfelelően van-e kitöltve
-
-    // Ellenőrizzük, hogy a szerző neve mező üres-e
-    if(szerzoNeve.value === ""){
-        szerzoNeveError.style.display = "block"; // Ha üres, megjelenítjük a hibaüzenetet
-        valid = false; // Az űrlapot érvénytelennek jelöljük
+    if(!validateField(szerzoNeve,szerzoNeveError)){ 
+        valid = false; // Ha hiba van a szerző neve mezőben, akkor az űrlapot érvénytelennek jelöljük
     }
 
-    if(korszak.value === ""){ // Ellenőrizzük, hogy a korszak mező üres-e
-        korszakError.style.display = "block"; // Ha üres, megjelenítjük a hibaüzenetet
-        valid = false; // Az űrlapot érvénytelennek jelöljük
+    if(!validateField(korszak,korszakError)){
+        valid = false; // Ha hiba van a korszak mezőben, akkor az űrlapot érvénytelennek jelöljük
     }
 
-    if(!valid){ 
+    if(!valid){
         return; // Ha a form nem valid, nem kell tovább folyamatosan továbbítani
     }
 
