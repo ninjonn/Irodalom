@@ -1,57 +1,57 @@
-function generateForm(){
-    const form = document.createElement('form');
-    form.id = 'form';
-    form.action = '#';
+function generateForm(){ // Függvény definiálása, amely létrehoz egy űrlapot
+    const form = document.createElement('form'); // Létrehozunk egy form elemet
+    form.id = 'form'; // Beállítjuk az űrlap ID-ját form-ra
+    form.action = '#'; // Beállítjuk az űrlap action attribútumát
 
-    const fields = [
+    const fields = [ // Létrehozunk egy tömböt, amely az űrlap mezőit tartalmazza objektumokként
         {label: 'Költő neve:', type: 'text', id: 'kolto_nev'},
         {label: 'Korszak:', type: 'text', id: 'korszak'},
-        {label: 'Szerelme:', type: 'text', id: 'szerelem1'},
+        {label: 'Szerelme:', type: 'text', id: 'szerelem1'},    
         {label: 'Volt másik szerelme?', type: 'checkbox', id: 'masodik', checked: false},
         {label: 'Szerelme:', type: 'text', id: 'szerelem2'}
     ]
 
-    for(let i = 0;i<fields.length;i++){
-        const field = fields[i];
-        const div = document.createElement('div');
+    for(let i = 0;i<fields.length;i++){ // Végigiterálunk a fields tömb elemein
+        const field = fields[i]; // Az aktuális mező objektumának lekérése
+        const div = document.createElement('div'); // Létrehozunk egy div elemet, amelybe a mező elemeit fogjuk helyezni
 
-        const label = document.createElement('label');
-        label.htmlFor = field.id;
-        label.innerText = field.label;
-        div.appendChild(label);
+        const label = document.createElement('label'); // Létrehozunk egy label elemet
+        label.htmlFor = field.id; // Beállítjuk a label for attribútumát az aktuális mező id-jára
+        label.innerText = field.label; // Beállítjuk a label szövegét az aktuális mező címkéjére
+        div.appendChild(label); // Hozzáadjuk a label elemet a div-hez
 
-        div.appendChild(document.createElement('br'));
+        div.appendChild(document.createElement('br')); // Beszúrunk egy sortörést a div-be
 
-        const input = document.createElement('input');
-        input.type = field.type
-        input.id = field.id;
-        input.name = field.id;
-        if(field.type === 'checkbox' && field.checked !== undefined){
-            input.checked = field.checked;
+        const input = document.createElement('input'); // Létrehozunk egy input elemet
+        input.type = field.type // Beállítjuk az input típusát
+        input.id = field.id; // Beállítjuk az input id-ját
+        input.name = field.id; // Beállítjuk az input name attribútumát is ugyanarra, mint az id
+        if(field.type === 'checkbox' && field.checked !== undefined){ // Ha az aktuális mező checkbox típusú és a checked tulajdonság meg van adva
+            input.checked = field.checked; // Beállítjuk, hogy a checkbox alapértelmezett értéke be legyen-e jelölve
         }
-        div.appendChild(input);
+        div.appendChild(input); // Hozzáadjuk az input elemet a div-hez
 
-        const errorDiv = document.createElement('div')
-        errorDiv.className = 'error-message';
-        errorDiv.id = "error-" + field.id;
-        div.appendChild(errorDiv);
+        const errorDiv = document.createElement('div') // Létrehozunk egy új div elemet a hibaüzenetek számára
+        errorDiv.className = 'error-message'; // Beállítjuk az errorDiv osztályát, hogy a CSS-ben stílusolhassuk
+        errorDiv.id = "error-" + field.id; // Az errorDiv id-jét az aktuális mező id-je alapján állítjuk be
+        div.appendChild(errorDiv); // Hozzáadjuk a hibaüzenet div-et a mező div-jéhez
 
-        div.appendChild(document.createElement('br'));
-        div.appendChild(document.createElement('br'));
+        div.appendChild(document.createElement('br')); // Beszúrunk egy sortörést a div-be
+        div.appendChild(document.createElement('br')); // Beszúrunk egy sortörést a div-be
 
-        form.appendChild(div);
+        form.appendChild(div); // Hozzáadjuk az összerakott div-et az űrlaphoz
     }
     
-    const submit = document.createElement('button');
-    submit.type ='submit';
-    submit.innerText = 'Hozzáadás';
-    form.appendChild(submit);
+    const submit = document.createElement('button'); // Létrehozunk egy button elemet a submit gombhoz
+    submit.type ='submit'; // Beállítjuk a button típusát submit-ra
+    submit.innerText = 'Hozzáadás'; // Beállítjuk a button szövegét
+    form.appendChild(submit); // Hozzáadjuk a submit gombot az űrlaphoz
 
-    document.body.appendChild(form);
-    return form
+    document.body.appendChild(form); // Hozzáadjuk az űrlapot a dokumentum body részéhez
+    return form; // Visszatérünk a létrehozott űrlap elemmel
 }
 
-const formElement = generateForm();
+const formElement = generateForm(); // Meghívjuk a generateForm függvényt és az eredményt elmentjük a formElement változóba
 
 
 const table = document.createElement('table'); // Táblázat HTML elem létrehozása
