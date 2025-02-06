@@ -105,22 +105,28 @@ form.addEventListener('submit', function (e) { // Az űrlap submit eseményére 
     const szerelem2 = document.getElementById('szerelem2')
     const checkbox = document.getElementById('masodik')
 
+    // Lekérjük a név és korszak hibaüzenethez tartozó HTML elemeket az azonosítóik alapján
     const szerzoNeveError = document.getElementById('error-kolto-nev');
     const korszakError = document.getElementById('error-korszak');
 
-    let valid = true;
+    // Alapértelmezetten elrejtjük a hibaüzeneteket, hogy csak akkor jelenjenek meg, ha hiba van
+    szerzoNeveError.style.display = 'none';
+    korszakError.style.display = 'none';
 
+    let valid = true; // Létrehozunk egy `valid` változót, amely azt jelzi, hogy az űrlap megfelelően van-e kitöltve
+
+    // Ellenőrizzük, hogy a szerző neve mező üres-e
     if(szerzoNeve.value === ""){
-        szerzoNeveError.style.display = "block"
-        valid = false;
+        szerzoNeveError.style.display = "block"; // Ha üres, megjelenítjük a hibaüzenetet
+        valid = false; // Az űrlapot érvénytelennek jelöljük
     }
 
-    if(korszak.value === ""){
-        korszakError.style.display = "block"
-        valid = false;
+    if(korszak.value === ""){ // Ellenőrizzük, hogy a korszak mező üres-e
+        korszakError.style.display = "block"; // Ha üres, megjelenítjük a hibaüzenetet
+        valid = false; // Az űrlapot érvénytelennek jelöljük
     }
 
-    if(!valid){
+    if(!valid){ 
         return; // Ha a form nem valid, nem kell tovább folyamatosan továbbítani
     }
 
