@@ -31,23 +31,23 @@ const table = document.createElement('table'); // Táblázat HTML elem létrehoz
 document.body.appendChild(table); // Hozzáadjuk a táblázatot a dokumentum törzséhez
 
 const tableHeader = document.createElement('thead'); // Táblázat fejléc elem létrehozása
-const headerRow = document.createElement('tr'); // Táblázat fejlécsor létrehozása
 table.appendChild(tableHeader); // A fejléc hozzáadása a táblázathoz
-tableHeader.appendChild(headerRow); // A fejlécsoró hozzáadása a fejlécbe
 
-const headerCell1 = document.createElement('th'); // Fejléc cella létrehozása
-headerCell1.innerHTML = array[0].field1; // Az első fejléc cella szövegének beállítása az első objektum 'field1' értékére
-headerRow.appendChild(headerCell1); // A cella hozzáadása a fejlécsorhoz
+function generateHeader(headerData){ // Definiálom a generateHeader függvényt
+    tableHeader.innerHTML = ""; // Törlöm az előző fejlécet
 
-const headerCell2 = document.createElement('th'); // Új fejléc cella létrehozása
-headerCell2.innerHTML = array[0].field2; // A második fejléc cella szövegének beállítása az első objektum 'field2' értékére
-headerRow.appendChild(headerCell2); // A cella hozzáadása a fejlécsorhoz
-
-const headerCell3 = document.createElement('th'); // Új fejléc cella létrehozása
-headerCell3.innerHTML = array[0].field3; // A harmadik fejléc cella szövegének beállítása az első objektum 'field3' értékére
-headerCell3.colSpan = 2; // A cella két oszlopot foglal el
-headerRow.appendChild(headerCell3); // A cella hozzáadása a fejlécsorhoz
-
+    const headerRow = document.createElement('tr'); // Táblázat fejlécsor létrehozása
+    
+    for(const i in headerData){
+        const headerCell = document.createElement('th'); // Létrehoz egy új fejléc cellát
+        headerCell.innerHTML = headerData[i]; // Beállítja a cella tartalmát az aktuális elem nevére
+        if(i === 'field3'){
+            headerCell.colSpan = 2; // A cella két oszlopot foglal el
+        }
+        headerRow.appendChild(headerCell); // A cella hozzáadása a fejlécsorhoz
+    }
+    tableHeader.appendChild(headerRow); // A fejlécsor hozzáadása a fejlécbe
+}
 
 function generateTable() { // Definiálom a generateTable függvényt
     table.innerHTML = ''; // Törlöm az előző táblázatot
@@ -90,6 +90,7 @@ function generateTable() { // Definiálom a generateTable függvényt
         }
     }
 }
+generateHeader(array[0]); // A generált fejlécnek generálásának meghívása
 generateTable(); // A generált táblázat generálásának meghívása
 
 const form = document.getElementById('form'); // Megkeresi az `form` azonosítójú HTML elemet
