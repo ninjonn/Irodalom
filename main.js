@@ -97,16 +97,44 @@ const form = document.getElementById('form'); // Megkeresi az `form` azonosító
 const szerzoNeveError = document.getElementById('error-kolto-nev'); // HTML elem lekérése, amely a szerző nevéhez tartozó hibaüzenetet jeleníti meg
 const korszakError = document.getElementById('error-korszak'); // HTML elem lekérése, amely a korszakhoz tartozó hibaüzenetet jeleníti meg
 
-function validateField(inputElement,errorElement){ // Függvény, amely egy bemeneti mezőt és egy hibaüzenet elemet vár, hogy validálja a bemeneti mezőt
+function validateField(inputElement, errorElement) { // Függvény, amely egy bemeneti mezőt és egy hibaüzenet elemet vár, hogy validálja a bemeneti mezőt
     let valid = true; // A valid változó alapértelmezett értéke igaz, amely azt jelzi, hogy a mező helyes
 
-    if(inputElement.value === ""){  // Ha a bemeneti mező értéke üres
+    if (inputElement.value === "") {  // Ha a bemeneti mező értéke üres
         errorElement.style.display = "block"; // A hibaüzenet megjelenítése láthatóvá válik
         valid = false; // Az érték nem valid, így false-ra állítjuk
-    }else{
+    } else {
         errorElement.style.display = "none"; // Ha a mezőben van érték, elrejtjük a hibaüzenetet
     }
     return valid; // Visszaadja, hogy a mező valid-e
+}
+
+function complextValidation(checkboxElement, szerelem1Element, szerelem2Element) {
+    let valid = true; // A valid változó alapértelmezett értéke igaz, amely azt jelzi, hogy a mezők valid-ek
+
+    // Ha a jelölőnégyzet be van jelölve, akkor mindkét szerelem mező kitöltése kötelező
+    if (checkboxElement.checked) {
+        if (szerelem1Element.value === "") { // Ellenőrizzük az első szerelem mezőt
+            const error1 = document.getElementById('error-szerelem1');
+            error1.style.display = "block"; // Megjelenítjük a hibaüzenetet
+            valid = false; // Érvénytelen, mert az első szerelem mező üres
+        } else {
+            document.getElementById('error-szerelem1').style.display = "none"; // Elrejtjük a hibaüzenetet
+        }
+        
+        if (szerelem2Element.value === "") { // Ellenőrizzük a második szerelem mezőt
+            const error2 = document.getElementById('error-szerelem2');
+            error2.style.display = "block"; // Megjelenítjük a hibaüzenetet
+            valid = false; // Érvénytelen, mert a második szerelem mező üres
+        } else {
+            document.getElementById('error-szerelem2').style.display = "none"; // Elrejtjük a hibaüzenetet
+        }
+    } else {
+        // Ha a jelölőnégyzet nincs bejelölve, elrejtjük a szerelem mezők esetleges hibaüzeneteit
+        document.getElementById('error-szerelem1').style.display = "none";
+        document.getElementById('error-szerelem2').style.display = "none";
+    }
+    return valid; // Visszaadjuk az eredményt
 }
 
 form.addEventListener('submit', function (e) { // Az űrlap submit eseményére feliratkozunk egy eseménykezelővel
@@ -121,36 +149,19 @@ form.addEventListener('submit', function (e) { // Az űrlap submit eseményére 
 
     let valid = true // Létrehozunk egy `valid` változót, amely azt jelzi, hogy az űrlap megfelelően van-e kitöltve
 
-    if(!validateField(szerzoNeve,szerzoNeveError)){ 
+    if (!validateField(szerzoNeve, szerzoNeveError)) {
         valid = false; // Ha hiba van a szerző neve mezőben, akkor az űrlapot érvénytelennek jelöljük
     }
 
-    if(!validateField(korszak,korszakError)){
+    if (!validateField(korszak, korszakError)) {
         valid = false; // Ha hiba van a korszak mezőben, akkor az űrlapot érvénytelennek jelöljük
     }
 
-    if(checkbox.checked){ // Ha a jelölőnégyzet be van jelölve, akkor mindkét szerelem mező kitöltése kötelező
-        if(szerelem1.value === ""){ // Ellenőrizzük az első szerelem mezőt
-            document.getElementById('error-szerelem1'); // Megváltoztatjuk a hibaüzenet szövegét a kívánt üzenetre
-            document.getElementById('error-szerelem1').style.display = "block"; // Megjelenítjük a hibaüzenetet
-            valid = false; // Ha hiba van a második szerelem mezőben, akkor az űrlapot érvénytelennek jelöljük
-        }else{
-            document.getElementById('error-szerelem1').style.display = "none"; // Ha van érték, elrejtjük a hibaüzenetet
-        }
-
-        if(szerelem2.value === ""){ // Ellenőrizzük a második szerelem mezőt
-            document.getElementById('error-szerelem2'); // Beállítjuk a hibaüzenet szövegét a kívánt üzenetre
-            document.getElementById('error-szerelem2').style.display = "block"; // Megjelenítjük a hibaüzenetet
-            valid = false; // Ha hiba van a második szerelem mezőben, akkor az űrlapot érvénytelennek jelöljük
-        }else{
-            document.getElementById('error-szerelem2').style.display = "none"; // Ha van érték, elrejtjük a hibaüzenetet
-        }
-    }else{ // Ha a jelölőnégyzet nincs bejelölve, elrejthetjük a szerelem mezők hibaüzeneteit
-        document.getElementById('error-szerelem1').style.display = "none";
-        document.getElementById('error-szerelem2').style.display = "none";
+    if(!complextValidation(checkbox,szerelem1,szerelem2)){
+        valid = false; // Ha hiba van a második szerelem mezőkben, akkor az űrlapot érvénytelennek jelöljük
     }
 
-    if(!valid){
+    if (!valid) {
         return; // Ha a form nem valid, nem kell tovább folyamatosan továbbítani
     }
 
