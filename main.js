@@ -1,3 +1,7 @@
+/**
+ * Létrehoz egy űrlapot a megadott mezőkkel 
+ * @returns {HTMLFormElement} A létrehozott űrlap HTML eleme
+ */
 function generateForm(){ // Függvény definiálása, amely létrehoz egy űrlapot
     const form = document.createElement('form'); // Létrehozunk egy form elemet
     form.id = 'form'; // Beállítjuk az űrlap ID-ját form-ra
@@ -59,7 +63,10 @@ document.body.appendChild(table); // Hozzáadjuk a táblázatot a dokumentum tö
 
 const tableHeader = document.createElement('thead'); // Táblázat fejléc elem létrehozása
 
-
+/**
+ * Generálja a táblázat fejlécét a megadott adat alapján
+ * @param {Object} headerData Objektum, amely a fejléc cellák tartalmát tartalmazza 
+ */
 function generateHeader(headerData){ // Definiálom a generateHeader függvényt
     tableHeader.innerHTML = ""; // Törlöm az előző fejlécet
 
@@ -77,6 +84,10 @@ function generateHeader(headerData){ // Definiálom a generateHeader függvényt
 }
 table.appendChild(tableHeader); // A fejléc hozzáadása a táblázathoz
 
+/**
+ * Generálja a táblázat törzsét a megadott adatok alapján
+ * @param {Array<Object>} data  A táblázat sorainak adatait tartalmazó tömb. 
+ */
 function generateTable(data) { // Definiálom a generateTable függvényt
     table.innerHTML = ''; // Törlöm az előző táblázatot
     table.appendChild(tableHeader); // Újra hozzáadom a fejlécet
@@ -152,6 +163,12 @@ generateTable(array); // A generált táblázat generálásának meghívása
 const szerzoNeveError = document.getElementById('error-kolto_nev'); // HTML elem lekérése, amely a szerző nevéhez tartozó hibaüzenetet jeleníti meg
 const korszakError = document.getElementById('error-korszak'); // HTML elem lekérése, amely a korszakhoz tartozó hibaüzenetet jeleníti meg
 
+/**
+ * Validál egy adott input mezőt, és megjeleníti a hibaüzenetet, ha üres
+ * @param {HTMLInputElement} inputElement  Az ellenőrizendő input elem
+ * @param {HTMLElement} errorElement  Az elem, ahol a hibaüzenet megjelenik
+ * @returns {boolean} true 
+ */
 function validateField(inputElement, errorElement) { // Függvény, amely egy bemeneti mezőt és egy hibaüzenet elemet vár, hogy validálja a bemeneti mezőt
     let valid = true; // A valid változó alapértelmezett értéke igaz, amely azt jelzi, hogy a mező helyes
 
@@ -165,6 +182,13 @@ function validateField(inputElement, errorElement) { // Függvény, amely egy be
     return valid; // Visszaadja, hogy a mező valid-e
 }
 
+/**
+ * Komplex validációt végez két szerelem input mezőn, ha a checkbox be van jelölve
+ * @param {HTMLInputElement} checkboxElement  A checkbox elem
+ * @param {HTMLInputElement} szerelem1Element  Az első szerelem input elem 
+ * @param {HTMLInputElement} szerelem2Element  A második szerelem input elem
+ * @returns {boolean}
+ */
 function complextValidation(checkboxElement, szerelem1Element, szerelem2Element) {
     let valid = true; // A valid változó alapértelmezett értéke igaz, amely azt jelzi, hogy a mezők valid-ek
 
