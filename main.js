@@ -129,6 +129,27 @@ form.addEventListener('submit', function (e) { // Az űrlap submit eseményére 
         valid = false; // Ha hiba van a korszak mezőben, akkor az űrlapot érvénytelennek jelöljük
     }
 
+    if(checkbox.checked){ // Ha a jelölőnégyzet be van jelölve, akkor mindkét szerelem mező kitöltése kötelező
+        if(szerelem1.value === ""){ // Ellenőrizzük az első szerelem mezőt
+            document.getElementById('error-szerelem1'); // Megváltoztatjuk a hibaüzenet szövegét a kívánt üzenetre
+            document.getElementById('error-szerelem1').style.display = "block"; // Megjelenítjük a hibaüzenetet
+            valid = false; // Ha hiba van a második szerelem mezőben, akkor az űrlapot érvénytelennek jelöljük
+        }else{
+            document.getElementById('error-szerelem1').style.display = "none"; // Ha van érték, elrejtjük a hibaüzenetet
+        }
+
+        if(szerelem2.value === ""){ // Ellenőrizzük a második szerelem mezőt
+            document.getElementById('error-szerelem2'); // Beállítjuk a hibaüzenet szövegét a kívánt üzenetre
+            document.getElementById('error-szerelem2').style.display = "block"; // Megjelenítjük a hibaüzenetet
+            valid = false; // Ha hiba van a második szerelem mezőben, akkor az űrlapot érvénytelennek jelöljük
+        }else{
+            document.getElementById('error-szerelem2').style.display = "none"; // Ha van érték, elrejtjük a hibaüzenetet
+        }
+    }else{ // Ha a jelölőnégyzet nincs bejelölve, elrejthetjük a szerelem mezők hibaüzeneteit
+        document.getElementById('error-szerelem1').style.display = "none";
+        document.getElementById('error-szerelem2').style.display = "none";
+    }
+
     if(!valid){
         return; // Ha a form nem valid, nem kell tovább folyamatosan továbbítani
     }
