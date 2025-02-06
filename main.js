@@ -105,10 +105,23 @@ form.addEventListener('submit', function (e) { // Az űrlap submit eseményére 
     const szerelem2 = document.getElementById('szerelem2')
     const checkbox = document.getElementById('masodik')
 
-    const urlap = e.currentTarget;
-    const errors = urlap.querySelectorAll('.error-message');
-    for(const error of errors){
-        error.innerHTML = '';
+    const szerzoNeveError = document.getElementById('error-kolto-nev');
+    const korszakError = document.getElementById('error-korszak');
+
+    let valid = true;
+
+    if(szerzoNeve.value === ""){
+        szerzoNeveError.style.display = "block"
+        valid = false;
+    }
+
+    if(korszak.value === ""){
+        korszakError.style.display = "block"
+        valid = false;
+    }
+
+    if(!valid){
+        return; // Ha a form nem valid, nem kell tovább folyamatosan továbbítani
     }
 
     // Az input elemek aktuális értékeinek kiolvasása:
@@ -117,17 +130,6 @@ form.addEventListener('submit', function (e) { // Az űrlap submit eseményére 
     const szerelem1Value = szerelem1.value
     const szerelem2Value = szerelem2.value
     const checkboxChecked = checkbox.checked
-
-    let valid = true;
-
-    if(szerzoNeveValue === ''){
-        const szuloElem =  szerzoNeve.parentElement;
-        const errorMessage = szuloElem.querySelector('.error-message');
-        if(errorMessage != undefined){
-            errorMessage.innerHTML = ""
-        }
-        valid = false;
-    }
 
     // Inicializáljuk a változókat, amelyek a táblázatban megjelenítendő szerelem értékeket fogják tartalmazni:
     let field3 = "";

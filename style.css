@@ -15,7 +15,7 @@ tbody td:first-child, tbody td:last-child {
 }
 .error-message {
     color: red;
-    display:block;
+    display:none;
     margin-top: 5px;
     padding: 3px;
 }
