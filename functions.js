@@ -60,8 +60,6 @@ function generateForm(){ // Függvény definiálása, amely létrehoz egy űrlap
  * @param {Object} headerData Objektum, amely a fejléc cellák tartalmát tartalmazza 
  */
 function generateHeader(headerData){ // Definiálom a generateHeader függvényt
-    tableHeader.innerHTML = ""; // Törlöm az előző fejlécet
-
     const headerRow = document.createElement('tr'); // Táblázat fejlécsor létrehozása
     
     for(const i in headerData){

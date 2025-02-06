@@ -42,7 +42,7 @@ const array = [{ // Az első objektum a táblázat fejlécének adatait tartalma
     field4: 'Csinszka' // A negyedik cella szövegét állítja be a negyedik sorban
 }];
 
-generateHeader(array[0]); // A generált fejlécnek generálásának meghívása
+generateHeader(array[0],tableHeader); // A generált fejlécnek generálásának meghívása
 generateTable(array,table); // A generált táblázat generálásának meghívása
 
 
