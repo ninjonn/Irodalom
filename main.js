@@ -31,7 +31,7 @@ const table = document.createElement('table'); // Táblázat HTML elem létrehoz
 document.body.appendChild(table); // Hozzáadjuk a táblázatot a dokumentum törzséhez
 
 const tableHeader = document.createElement('thead'); // Táblázat fejléc elem létrehozása
-table.appendChild(tableHeader); // A fejléc hozzáadása a táblázathoz
+
 
 function generateHeader(headerData){ // Definiálom a generateHeader függvényt
     tableHeader.innerHTML = ""; // Törlöm az előző fejlécet
@@ -48,19 +48,17 @@ function generateHeader(headerData){ // Definiálom a generateHeader függvényt
     }
     tableHeader.appendChild(headerRow); // A fejlécsor hozzáadása a fejlécbe
 }
+table.appendChild(tableHeader); // A fejléc hozzáadása a táblázathoz
 
-function generateTable() { // Definiálom a generateTable függvényt
+function generateTable(data) { // Definiálom a generateTable függvényt
     table.innerHTML = ''; // Törlöm az előző táblázatot
     table.appendChild(tableHeader); // Újra hozzáadom a fejlécet
 
     const tableBody = document.createElement('tbody'); // Táblázat törzs elem létrehozása
     table.appendChild(tableBody); // A törzs hozzáadása a táblázathoz
 
-    const row1 = document.createElement('tr'); // Táblázat első sorának létrehozása
-    tableBody.appendChild(row1); // Az első sor hozzáadása a törzshöz
-
-    for (let i = 1; i < array.length; i++) { // Végigiterál az `array` elemein az első elem kihagyásával
-        const currentElement = array[i]; // Az aktuális sor objektumát elmenti a `currentElement` változóba
+    for(let i = 1 ; i < data.length; i++) {
+        const currentElement = data[i]; // Az aktuális sor objektumát elmenti a `currentElement` változóba
 
         const row = document.createElement('tr'); // Létrehoz egy új táblázatsort
         tableBody.appendChild(row); // Hozzáadja az új sort a táblázat törzséhez
@@ -91,7 +89,7 @@ function generateTable() { // Definiálom a generateTable függvényt
     }
 }
 generateHeader(array[0]); // A generált fejlécnek generálásának meghívása
-generateTable(); // A generált táblázat generálásának meghívása
+generateTable(array); // A generált táblázat generálásának meghívása
 
 const form = document.getElementById('form'); // Megkeresi az `form` azonosítójú HTML elemet
 
@@ -196,7 +194,7 @@ form.addEventListener('submit', function (e) { // Az űrlap submit eseményére 
     array.push(newElement); // Az új objektum hozzáadása a táblázat adatait tartalmazó tömbhöz
     table.innerHTML = ''; // Törli a táblázat tartalmát
     table.appendChild(tableHeader);  // Újra hozzáadja a fejlécet a táblázathoz
-    generateTable(); // Meghívja a függvényt, amely újra létrehozza a táblázat törzsét a módosított array alapján
+    generateTable(array); // Meghívja a függvényt, amely újra létrehozza a táblázat törzsét a módosított array alapján
 
     // Az űrlap input mezőinek és a checkbox visszaállítása alapértelmezett értékre:
     szerzoNeve.value = "";
