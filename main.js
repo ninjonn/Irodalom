@@ -1,31 +1,58 @@
-const array = [{ // Az első objektum a táblázat fejlécének adatait tartalmazza
-    field1: 'Szerző neve', // Az első fejléc cella szövegét állítja be
-    field2: 'Korszak', // A második fejléc cella szövegét állítja be
-    field3: 'Szerelmek' // A harmadik fejléc cella szövegét állítja
-},
-{ // Az első sor objektuma
-    field1: 'Balassi Bálint', // Az első cella szövegét állítja be az első sorban
-    field2: 'reformáció', // A második cella szövegét állítja be az első sorban
-    field3: 'Losonczy Anna', // A harmadik cella szövegét állítja be az első sorban
-    field4: 'Dobó Krisztina' // A negyedik cella szövegét állítja be az első sorban
-},
-{ // A második sor objektuma
-    field1: 'Csokonay Vitéz Mihály', // Az első cella szövegét állítja be a második sorban
-    field2: 'felvilágosodás', // A második cella szövegét állítja be a második sorban
-    field3: 'Vajda Juliána', // A harmadik cella szövegét állítja be a második sorban
-},
-{ // A harmadik sor objektuma
-    field1: 'Petőfi Sándor', // Az első cella szövegét állítja be a harmadik sorban
-    field2: 'magyar romantika', // A második cella szövegét állítja be a harmadik sorban
-    field3: 'Mednyánszky Berta', // A harmadik cella szövegét állítja be a harmadik sorban
-    field4: 'Szendrey Júlia' // A negyedik cella szövegét állítja be a harmadik sorban
-},
-{ // A negyedik sor objektuma
-    field1: 'Ady Endre', // Az első cella szövegét állítja be a negyedik sorban
-    field2: '20. század', // A második cella szövegét állítja be a negyedik sorban
-    field3: 'Léda', // A harmadik cella szövegét állítja be a negyedik sorban
-    field4: 'Csinszka' // A negyedik cella szövegét állítja be a negyedik sorban
-}];
+function generateForm(){
+    const form = document.createElement('form');
+    form.id = 'form';
+    form.action = '#';
+
+    const fields = [
+        {label: 'Költő neve:', type: 'text', id: 'kolto_nev'},
+        {label: 'Korszak:', type: 'text', id: 'korszak'},
+        {label: 'Szerelme:', type: 'text', id: 'szerelem1'},
+        {label: 'Volt másik szerelme?', type: 'checkbox', id: 'masodik', checked: false},
+        {label: 'Szerelme:', type: 'text', id: 'szerelem2'}
+    ]
+
+    for(let i = 0;i<fields.length;i++){
+        const field = fields[i];
+        const div = document.createElement('div');
+
+        const label = document.createElement('label');
+        label.htmlFor = field.id;
+        label.innerText = field.label;
+        div.appendChild(label);
+
+        div.appendChild(document.createElement('br'));
+
+        const input = document.createElement('input');
+        input.type = field.type
+        input.id = field.id;
+        input.name = field.id;
+        if(field.type === 'checkbox' && field.checked !== undefined){
+            input.checked = field.checked;
+        }
+        div.appendChild(input);
+
+        const errorDiv = document.createElement('div')
+        errorDiv.className = 'error-message';
+        errorDiv.id = "error-" + field.id;
+        div.appendChild(errorDiv);
+
+        div.appendChild(document.createElement('br'));
+        div.appendChild(document.createElement('br'));
+
+        form.appendChild(div);
+    }
+    
+    const submit = document.createElement('button');
+    submit.type ='submit';
+    submit.innerText = 'Hozzáadás';
+    form.appendChild(submit);
+
+    document.body.appendChild(form);
+    return form
+}
+
+const formElement = generateForm();
+
 
 const table = document.createElement('table'); // Táblázat HTML elem létrehozása
 document.body.appendChild(table); // Hozzáadjuk a táblázatot a dokumentum törzséhez
@@ -88,23 +115,53 @@ function generateTable(data) { // Definiálom a generateTable függvényt
         }
     }
 }
+
+const array = [{ // Az első objektum a táblázat fejlécének adatait tartalmazza
+    field1: 'Szerző neve', // Az első fejléc cella szövegét állítja be
+    field2: 'Korszak', // A második fejléc cella szövegét állítja be
+    field3: 'Szerelmek' // A harmadik fejléc cella szövegét állítja
+},
+{ // Az első sor objektuma
+    field1: 'Balassi Bálint', // Az első cella szövegét állítja be az első sorban
+    field2: 'reformáció', // A második cella szövegét állítja be az első sorban
+    field3: 'Losonczy Anna', // A harmadik cella szövegét állítja be az első sorban
+    field4: 'Dobó Krisztina' // A negyedik cella szövegét állítja be az első sorban
+},
+{ // A második sor objektuma
+    field1: 'Csokonay Vitéz Mihály', // Az első cella szövegét állítja be a második sorban
+    field2: 'felvilágosodás', // A második cella szövegét állítja be a második sorban
+    field3: 'Vajda Juliána', // A harmadik cella szövegét állítja be a második sorban
+},
+{ // A harmadik sor objektuma
+    field1: 'Petőfi Sándor', // Az első cella szövegét állítja be a harmadik sorban
+    field2: 'magyar romantika', // A második cella szövegét állítja be a harmadik sorban
+    field3: 'Mednyánszky Berta', // A harmadik cella szövegét állítja be a harmadik sorban
+    field4: 'Szendrey Júlia' // A negyedik cella szövegét állítja be a harmadik sorban
+},
+{ // A negyedik sor objektuma
+    field1: 'Ady Endre', // Az első cella szövegét állítja be a negyedik sorban
+    field2: '20. század', // A második cella szövegét állítja be a negyedik sorban
+    field3: 'Léda', // A harmadik cella szövegét állítja be a negyedik sorban
+    field4: 'Csinszka' // A negyedik cella szövegét állítja be a negyedik sorban
+}];
+
 generateHeader(array[0]); // A generált fejlécnek generálásának meghívása
 generateTable(array); // A generált táblázat generálásának meghívása
 
-const form = document.getElementById('form'); // Megkeresi az `form` azonosítójú HTML elemet
 
-const szerzoNeveError = document.getElementById('error-kolto-nev'); // HTML elem lekérése, amely a szerző nevéhez tartozó hibaüzenetet jeleníti meg
+const szerzoNeveError = document.getElementById('error-kolto_nev'); // HTML elem lekérése, amely a szerző nevéhez tartozó hibaüzenetet jeleníti meg
 const korszakError = document.getElementById('error-korszak'); // HTML elem lekérése, amely a korszakhoz tartozó hibaüzenetet jeleníti meg
 
 function validateField(inputElement, errorElement) { // Függvény, amely egy bemeneti mezőt és egy hibaüzenet elemet vár, hogy validálja a bemeneti mezőt
     let valid = true; // A valid változó alapértelmezett értéke igaz, amely azt jelzi, hogy a mező helyes
 
     if (inputElement.value === "") {  // Ha a bemeneti mező értéke üres
-        errorElement.style.display = "block"; // A hibaüzenet megjelenítése láthatóvá válik
-        valid = false; // Az érték nem valid, így false-ra állítjuk
+        errorElement.innerText = "Hiba: Ezt a mezőt kötelező kitölteni!"
+        errorElement.style.display = "block"; // Megjelenítjük a hibaüzenetet
+        valid = false; // Érvénytelen, mert a mező üres
     } else {
-        errorElement.style.display = "none"; // Ha a mezőben van érték, elrejtjük a hibaüzenetet
-    }
+        errorElement.style.display = "none";
+        }
     return valid; // Visszaadja, hogy a mező valid-e
 }
 
@@ -113,20 +170,22 @@ function complextValidation(checkboxElement, szerelem1Element, szerelem2Element)
 
     // Ha a jelölőnégyzet be van jelölve, akkor mindkét szerelem mező kitöltése kötelező
     if (checkboxElement.checked) {
+        const error1 = document.getElementById('error-szerelem1');
+        const error2 = document.getElementById('error-szerelem2');
         if (szerelem1Element.value === "") { // Ellenőrizzük az első szerelem mezőt
-            const error1 = document.getElementById('error-szerelem1');
+            error1.innerText = "Hiba: Ezt a mezőt kötelező kitölteni!"; // Megjelenítjük a hibaüzenetet
             error1.style.display = "block"; // Megjelenítjük a hibaüzenetet
             valid = false; // Érvénytelen, mert az első szerelem mező üres
         } else {
-            document.getElementById('error-szerelem1').style.display = "none"; // Elrejtjük a hibaüzenetet
+            error1.style.display = "none"; // Elrejtjük a hibaüzenetet
         }
         
         if (szerelem2Element.value === "") { // Ellenőrizzük a második szerelem mezőt
-            const error2 = document.getElementById('error-szerelem2');
+            error2.innerText = "Hiba: Ezt a mezőt kötelező kitölteni!"; // Megjelenítjük a hibaüzenetet
             error2.style.display = "block"; // Megjelenítjük a hibaüzenetet
             valid = false; // Érvénytelen, mert a második szerelem mező üres
         } else {
-            document.getElementById('error-szerelem2').style.display = "none"; // Elrejtjük a hibaüzenetet
+            error2.style.display = "none"; // Elrejtjük a hibaüzenetet
         }
     } else {
         // Ha a jelölőnégyzet nincs bejelölve, elrejtjük a szerelem mezők esetleges hibaüzeneteit
@@ -135,8 +194,7 @@ function complextValidation(checkboxElement, szerelem1Element, szerelem2Element)
     }
     return valid; // Visszaadjuk az eredményt
 }
-
-form.addEventListener('submit', function (e) { // Az űrlap submit eseményére feliratkozunk egy eseménykezelővel
+formElement.addEventListener('submit', function (e) { // Az űrlap submit eseményére feliratkozunk egy eseménykezelővel
     e.preventDefault(); // A form submit eseménye elkerülésének megelőzése
 
     // Lekéri a HTML-ben lévő elemeket az azonosítóik alapján:
