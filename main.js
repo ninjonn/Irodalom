@@ -51,6 +51,7 @@ headerRow.appendChild(headerCell3); // A cella hozzáadása a fejlécsorhoz
 
 function generateTable() { // Definiálom a generateTable függvényt
     table.innerHTML = ''; // Törlöm az előző táblázatot
+    table.appendChild(tableHeader); // Újra hozzáadom a fejlécet
 
     const tableBody = document.createElement('tbody'); // Táblázat törzs elem létrehozása
     table.appendChild(tableBody); // A törzs hozzáadása a táblázathoz
@@ -73,7 +74,7 @@ function generateTable() { // Definiálom a generateTable függvényt
         row.appendChild(rowField2); // Hozzáadja a cellát az aktuális táblázatsorhoz
 
         const rowField3 = document.createElement('td'); // Létrehoz egy új cellát az aktuális sor "field3" adatának tárolására
-        
+
 
         if (!currentElement.field4) { // Ellenőrzi, hogy az aktuális objektumban van-e "field4"
             rowField3.innerHTML = (currentElement.field3 === "") ? "-" : currentElement.field3; // Ha az első szerelem mező üres, akkor "-" lesz a megjelenített érték, egyébként az első szerelem értéke
@@ -94,7 +95,7 @@ generateTable(); // A generált táblázat generálásának meghívása
 
 const form = document.getElementById('form'); // Megkeresi az `form` azonosítójú HTML elemet
 
-form.addEventListener('submit',function(e) { // Az űrlap submit eseményére feliratkozunk egy eseménykezelővel
+form.addEventListener('submit', function (e) { // Az űrlap submit eseményére feliratkozunk egy eseménykezelővel
     e.preventDefault(); // A form submit eseménye elkerülésének megelőzése
 
     // Lekéri a HTML-ben lévő elemeket az azonosítóik alapján:
@@ -102,16 +103,16 @@ form.addEventListener('submit',function(e) { // Az űrlap submit eseményére fe
     const korszak = document.getElementById('korszak')
     const szerelem1 = document.getElementById('szerelem1')
     const szerelem2 = document.getElementById('szerelem2')
-    const checkbox = document.getElementById('masodik') 
+    const checkbox = document.getElementById('masodik')
 
     const urlap = e.currentTarget;
     const errors = urlap.querySelectorAll('.error-message');
-    for(const error of errors) {
-        error.innerHTML = "";
+    for(const error of errors){
+        error.innerHTML = '';
     }
 
     // Az input elemek aktuális értékeinek kiolvasása:
-    const szerzoNeveValue = szerzoNeve.value 
+    const szerzoNeveValue = szerzoNeve.value
     const korszakValue = korszak.value
     const szerelem1Value = szerelem1.value
     const szerelem2Value = szerelem2.value
@@ -119,28 +120,13 @@ form.addEventListener('submit',function(e) { // Az űrlap submit eseményére fe
 
     let valid = true;
 
-    const nevErrorMessage = document.getElementById('error-korszak');
-    const nevMessage = nevErrorMessage.textContent;
-
-    if (korszakValue === "") {
-        const parentElement = korszak.parentElement;
-        const errorKorszak = parentElement.querySelector('.error-message');
-        errorKorszak.textContent = nevMessage;
+    if(szerzoNeveValue === ''){
+        const szuloElem =  szerzoNeve.parentElement;
+        const errorMessage = szuloElem.querySelector('.error-message');
+        if(errorMessage != undefined){
+            errorMessage.innerHTML = ""
+        }
         valid = false;
-    }
-
-    const korszakErrorMessage = document.getElementById('error-korszak');
-    const korszakMessage = korszakErrorMessage.textContent;
-
-    if (korszakValue === "") {
-        const parentElement = korszak.parentElement;
-        const errorKorszak = parentElement.querySelector('.error-message');
-        errorKorszak.textContent = korszakMessage;
-        valid = false;
-    }
-
-    if (!valid) {
-        return; // Kilép a függvényből, így nem kerül hozzáadásra a táblázatba az új sor
     }
 
     // Inicializáljuk a változókat, amelyek a táblázatban megjelenítendő szerelem értékeket fogják tartalmazni:
@@ -148,10 +134,10 @@ form.addEventListener('submit',function(e) { // Az űrlap submit eseményére fe
     let field4 = undefined;
 
     // Ha nincs bejelölve a checkbox, csak az első szerelem kerül a táblázatba, különben mindkét szerelem értékét hozzáadjuk
-    if(!checkboxChecked) {
+    if (!checkboxChecked) {
         field3 = (szerelem1Value === "") ? "-" : szerelem1Value; // Ha az első szerelem mező üres, akkor "-" lesz a megjelenített érték, egyébként az első szerelem értéke
         // field4 marad undefined, így a generateTable() függvény összevonja a cellákat
-    }else{  // Ha be van jelölve, akkor mindkét szerelem értékét beállítjuk:
+    } else {  // Ha be van jelölve, akkor mindkét szerelem értékét beállítjuk:
         field3 = (szerelem1Value === "") ? "-" : szerelem1Value;
         field4 = (szerelem2Value === "") ? "-" : szerelem2Value;
     }
@@ -160,7 +146,7 @@ form.addEventListener('submit',function(e) { // Az űrlap submit eseményére fe
         field1: szerzoNeveValue,
         field2: korszakValue,
         field3: field3,
-        field4: field4      
+        field4: field4
     }
 
     array.push(newElement); // Az új objektum hozzáadása a táblázat adatait tartalmazó tömbhöz
@@ -173,5 +159,5 @@ form.addEventListener('submit',function(e) { // Az űrlap submit eseményére fe
     korszak.value = "";
     szerelem1.value = "";
     szerelem2.value = "";
-    checkbox.checked = false; 
+    checkbox.checked = false;
 })
